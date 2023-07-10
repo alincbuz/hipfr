@@ -3,9 +3,8 @@ import pandas as pd
 import joblib
 from PIL import Image
 
-# Loading Our final trained Knn model
-model = open("LARC.pickle.dat", "rb")
-gb_clf = joblib.load(model)
+# Loading Our final trained model
+model.load_weights('model.h5')
 
 
 # Define the prediction function
@@ -46,7 +45,7 @@ def predict(varsta, sex, mediu, TOR, implant initial, diabet, status mintal, con
     elif fumator == 'Yes':
         fumator = 1
     
-    prediction = gb_clf.predict(pd.DataFrame([[varsta, sex, mediu, TOR, implant initial, diabet, status mintal, consum alcool, fumator, IMC]],
+    prediction = model.predict(pd.DataFrame([[varsta, sex, mediu, TOR, implant initial, diabet, status mintal, consum alcool, fumator, IMC]],
                                             columns=['varsta', 'sex', 'mediu', 'TOR', 'implant initial', 'diabet', 'status mintal', 'consum alcool', 'fumator', 'IMC']))
     return prediction
 
