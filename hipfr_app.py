@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-import tensorflow as tf
+from keras.models import load_model
 
 # Load the trained model
-model = tf.keras.models.load_model('hipfr_model.h5')
+model = load_model('hipfr_model.h5')
 
 # Define the prediction function
 def predict(varsta, sex, mediu, TOR, implant_initial, diabet, status_mintal, consum_alcool, fumator, IMC):
