@@ -7,19 +7,20 @@ import tensorflow as tf
 loaded_model = tf.keras.models.load_model('hipfr_model.h5')
 
 # Define the prediction function
-def predict(varsta, sex, mediu, TOR, implant_initial, diabet, status_mintal, consum_alcool, fumator, IMC):
+def predict(varsta, sex, mediu, TOR, implant_initial, HTA, diabet, status_mintal, consum_alcool, fumator, IMC):
     # Preprocess the input variables
     sex = 0 if sex == 'Female' else 1
     mediu = 0 if mediu == 'R' else 1
     implant_initial = 0 if implant_initial == 'Placa' else 1
+    HTA = 0 if HTA == 'No' else 1
     diabet = 0 if diabet == 'Yes' else 1
     status_mintal = 0 if status_mintal == 'Bad' else 1
     consum_alcool = 0 if consum_alcool == 'No' else 1
     fumator = 0 if fumator == 'No' else 1
 
     # Create a DataFrame with the input values
-    data = pd.DataFrame([[varsta, sex, mediu, TOR, implant_initial, diabet, status_mintal, consum_alcool, fumator, IMC]],
-                        columns=['varsta', 'sex', 'mediu', 'TOR', 'implant_initial', 'diabet', 'status_mintal', 'consum_alcool', 'fumator', 'IMC'])
+    data = pd.DataFrame([[varsta, sex, mediu, TOR, implant_initial, HTA, diabet, status_mintal, consum_alcool, fumator, IMC]],
+                        columns=['varsta', 'sex', 'mediu', 'TOR', 'implant_initial', 'HTA', 'diabet', 'status_mintal', 'consum_alcool', 'fumator', 'IMC'])
 
     # Make the prediction
     prediction = loaded_model.predict(data)
@@ -38,6 +39,7 @@ sex = st.selectbox('Sex:', ['Male', 'Female'], index=0)
 mediu = st.selectbox('Mediu:', ['Urban', 'Rural'], index=0)
 TOR = st.number_input('Distanta de la osteosinteza la o noua fractura in zile:', min_value=0.0, max_value=150.0, value=20.0, step=1.0)
 implant_initial = st.selectbox('Implant initial:', ['Tija', 'Placa'], index=0)
+HTA = st.selectbox('Hipertensiune arteriala:', ['Yes', 'No'], index=0)
 diabet = st.selectbox('Diabet:', ['Yes', 'No'], index=1)
 status_mintal = st.selectbox('Status mintal:', ['Good', 'Bad'], index=1)
 consum_alcool = st.selectbox('Consum alcool:', ['Yes', 'No'], index=1)
@@ -47,5 +49,9 @@ IMC = st.number_input('Indicele de masa corporala:', min_value=0.0, max_value=40
 st.markdown('\n\n')
 
 if st.button("Click Here to Predict TRG"):
-    pred = predict(varsta, sex, mediu, TOR, implant_initial, diabet, status_mintal, consum_alcool, fumator, IMC)
-    st.image(bad) if pred == 0 else st.image(good)
+    pred = predict(varsta, sex, mediu, TOR, implant_initial, HTA, diabet, status_mintal, consum_alcool, fumator, IMC)
+    result_placeholder = st.empty()
+    if pred == 0:
+        result_placeholder.image(bad)
+    else:
+        result_placeholder.image(good)
