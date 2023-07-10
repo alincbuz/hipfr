@@ -1,10 +1,9 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
-from keras.models import load_model
 
 # Load the trained model
-model = load_model('hipfr_model.h5')
+loaded_model = tf.keras.models.load_model('hipfr_model.h5')
 
 # Define the prediction function
 def predict(varsta, sex, mediu, TOR, implant_initial, diabet, status_mintal, consum_alcool, fumator, IMC):
@@ -22,7 +21,7 @@ def predict(varsta, sex, mediu, TOR, implant_initial, diabet, status_mintal, con
                         columns=['varsta', 'sex', 'mediu', 'TOR', 'implant_initial', 'diabet', 'status_mintal', 'consum_alcool', 'fumator', 'IMC'])
 
     # Make the prediction
-    prediction = model.predict(data)
+    prediction = loaded_model.predict(data)
     return prediction
 
 # Loading images
