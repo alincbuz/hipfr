@@ -1,6 +1,6 @@
 streamlit==0.60.0
 pandas
-tensorflow
+tensorflow==2.6.0
 Keras
 Pillow
 scikit_learn==1.2.2
