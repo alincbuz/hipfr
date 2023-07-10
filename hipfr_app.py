@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
+import tensorflow as tf
 
 # Load the trained model
 loaded_model = tf.keras.models.load_model('hipfr_model.h5')
