@@ -77,7 +77,7 @@ def predict(varsta, sex, mediu, TOR, implant_initial, HTA, diabet, status_mintal
 good = Image.open('0.JPG')
 bad = Image.open('1.JPG')
 
-st.title('Aplicatie estimare risc fractura')
+st.title('Aplicatie screening osteoporoza si estimare risc fractura')
 st.image('https://www.endocrine.org/-/media/endocrine/images/patient-engagement-webpage/condition-page-images/bone-health-and-osteoporosis/osteoporosis_pe_1796x943.jpg')
 st.header('Introduceti variabilele predictor:')
 
