@@ -6,7 +6,7 @@ import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 
 # Load the trained model
-loaded_model = tf.keras.models.load_model('model.h5')
+loaded_model = tf.keras.models.load_model('hipfr_model.h5')
 
 # Load the MinMaxScaler
 scaler = MinMaxScaler()
